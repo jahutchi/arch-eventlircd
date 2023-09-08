@@ -24,6 +24,11 @@ pkgver() {
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
+prepare() {
+  cp ../udev.d/98-eventlircd.rules $srcdir/$pkgname/udev/rules.d/98-eventlircd.rules.disabled.in 
+  cp ../evmap/* $srcdir/$pkgname/etc 
+}
+
 build() {
   cd $pkgname
   autoreconf -vfi
